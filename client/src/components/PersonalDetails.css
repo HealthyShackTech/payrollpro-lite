@@ -1,0 +1,198 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fc;
+  color: #333;
+}
+
+/* Main Container */
+.personal-details {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Headings */
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #2a3d66;
+}
+
+h3 {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #2a3d66;
+}
+
+/* Back Button - Left Aligned */
+.back-button-container {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #45a049;
+}
+
+/* Form Labels & Inputs */
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Full-Width Buttons */
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Full width */
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Success and Error Messages */
+.success-message, .error-message {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.success-message {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+}
+
+.error-message {
+  background-color: #f44336;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Emergency Contact Styling */
+.emergency-contact {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f1f8ff;
+  border-left: 5px solid #007bff;
+  border-radius: 5px;
+}
+
+/* Staff ID Display */
+.staff-id-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.staff-id-value {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.read-only-badge {
+  background-color: #6c757d;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Emergency Contact Fallback */
+.emergency-contact-fallback {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.emergency-contact-fallback label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.emergency-contact-fallback input {
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.emergency-contact-fallback input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .personal-details {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
+}

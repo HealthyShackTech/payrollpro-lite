@@ -1,0 +1,105 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fc;
+  color: #333;
+}
+
+/* Main Container */
+.staff-details {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #2a3d66;
+}
+
+/* Back Button - Left Aligned */
+.back-button-container {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #45a049;
+}
+
+/* Details Section */
+.staff-details p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.staff-details strong {
+  color: #2a3d66;
+}
+
+.staff-details .section-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.section-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1;
+  margin: 0 8px;
+  text-align: center;
+}
+
+.section-button:hover {
+  background-color: #0056b3;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .staff-details {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .section-buttons {
+    flex-direction: column;
+  }
+
+  .section-button {
+    margin: 8px 0;
+  }
+}

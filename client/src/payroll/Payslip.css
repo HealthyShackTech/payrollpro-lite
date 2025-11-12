@@ -1,0 +1,68 @@
+.payslip-container {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.back-button {
+  margin-bottom: 15px;
+  padding: 8px 16px;
+  background-color: #b5b5b5;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #585858;
+}
+
+.payslip-title {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.payslip-table, .earnings-table, .tax-table, .superannuation-table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.payslip-table th, .payslip-table td, 
+.earnings-table th, .earnings-table td, 
+.tax-table th, .tax-table td, 
+.superannuation-table th, .superannuation-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.payslip-table th, .earnings-table th, 
+.tax-table th, .superannuation-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.hours-input {
+  width: 60px;
+  padding: 4px;
+  font-size: 1em;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.earnings-title, .tax-title, .superannuation-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Optional: Add hover effect for table rows */
+.payslip-table tbody tr:hover, 
+.earnings-table tbody tr:hover, 
+.tax-table tbody tr:hover, 
+.superannuation-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
