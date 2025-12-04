@@ -65,41 +65,47 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Google OAuth configuration
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL:
-        process.env.GOOGLE_CALLBACK_URL ||
-        'http://localhost:5001/auth/google/callback',
-    },
-    (accessToken, refreshToken, profile, done) => {
-      return done(null, profile);
+// Google OAuth configuration (optional)
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL:
+          process.env.GOOGLE_CALLBACK_URL ||
+          'http://localhost:5001/auth/google/callback',
+      },
+      (accessToken, refreshToken, profile, done) => {
+        return done(null, profile);
+      }
+    )
+  );
+
+  passport.serializeUser((user, done) => done(null, user));
+  passport.deserializeUser((user, done) => done(null, user));
+
+  // Routes for Google OAuth
+  app.get(
+    '/auth/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+  );
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/' }),
+    (req, res) => {
+      res.redirect('/');
     }
-  )
-);
-
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((user, done) => done(null, user));
-
-// Routes for Google OAuth
-app.get(
-  '/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
-app.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
-  (req, res) => {
-    res.redirect('/');
-  }
-);
+  );
+} else {
+  console.log('Google OAuth not configured. Skipping Google authentication setup.');
+  passport.serializeUser((user, done) => done(null, user));
+  passport.deserializeUser((user, done) => done(null, user));
+}
 
 // Simple pages
 app.get('/', (_req, res) => {
-  res.send('Home Page. <a href="/auth/google">Login with Google</a>');
+  res.send('PayrollPro API Server is running. <a href="/health">Health Check</a>');
 });
 
 app.get('/profile', (req, res) => {
