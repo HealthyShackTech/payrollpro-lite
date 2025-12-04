@@ -14,6 +14,8 @@ const app = express();
 module.exports.app = app;
 const PORT = process.env.PORT || 5001;
 
+
+
 // MongoDB connection setup
 const uri = process.env.MONGO_URI; // MongoDB connection string from .env file
 const client = new MongoClient(uri, {
@@ -36,8 +38,11 @@ async function connectToMongoDB() {
     app.locals.db = database;
     app.locals.client = client;
   } catch (err) {
-    console.error('MongoDB connection error:', err);
-    process.exit(1); // Exit the process if the connection fails
+    console.error('MongoDB connection error:', err.message);
+    console.warn('⚠️  Server will continue running, but database features will be unavailable.');
+    console.warn('⚠️  Please check your MongoDB connection string in .env file.');
+    // Don't exit - allow server to run without database
+    // process.exit(1); // Exit the process if the connection fails
   }
 }
 connectToMongoDB();
@@ -65,47 +70,41 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Google OAuth configuration (optional)
-if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-  passport.use(
-    new GoogleStrategy(
-      {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL:
-          process.env.GOOGLE_CALLBACK_URL ||
-          'http://localhost:5001/auth/google/callback',
-      },
-      (accessToken, refreshToken, profile, done) => {
-        return done(null, profile);
-      }
-    )
-  );
-
-  passport.serializeUser((user, done) => done(null, user));
-  passport.deserializeUser((user, done) => done(null, user));
-
-  // Routes for Google OAuth
-  app.get(
-    '/auth/google',
-    passport.authenticate('google', { scope: ['profile', 'email'] })
-  );
-  app.get(
-    '/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/' }),
-    (req, res) => {
-      res.redirect('/');
+// Google OAuth configuration
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL:
+        process.env.GOOGLE_CALLBACK_URL ||
+        'http://localhost:5001/auth/google/callback',
+    },
+    (accessToken, refreshToken, profile, done) => {
+      return done(null, profile);
     }
-  );
-} else {
-  console.log('Google OAuth not configured. Skipping Google authentication setup.');
-  passport.serializeUser((user, done) => done(null, user));
-  passport.deserializeUser((user, done) => done(null, user));
-}
+  )
+);
+
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));
+
+// Routes for Google OAuth
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    res.redirect('/');
+  }
+);
 
 // Simple pages
 app.get('/', (_req, res) => {
-  res.send('PayrollPro API Server is running. <a href="/health">Health Check</a>');
+  res.send('Home Page. <a href="/auth/google">Login with Google</a>');
 });
 
 app.get('/profile', (req, res) => {
