@@ -1,5 +1,5 @@
 // Required imports
-require('dotenv').config({ path: './.env' }); // 放最前，确保 env 可用
+require('dotenv').config({ path: '../.env' }); // 放最前，确保 env 可用
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
