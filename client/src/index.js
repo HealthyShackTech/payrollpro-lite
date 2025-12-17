@@ -32,7 +32,11 @@ const Header = () => {
 
   return (
     <header className="header">
-      <img src="https://i0.wp.com/healthyshack.tech/wp-content/uploads/2022/02/cropped-people-leaf-logohealthy-logo-5.png?fit=244%2C107&ssl=1" alt="Business Logo" className="logo" />
+      <img
+        src="https://sfzqwfxosihfgdhwakgm.supabase.co/storage/v1/object/public/media/0.6888386299658281.svg"
+        alt="Company Logo"
+        className="logo"
+      />
       <h1 className="app-title">Payroll Management System</h1>
       {isAuthenticated ? (
         <nav className="nav">
@@ -50,12 +54,7 @@ const Header = () => {
             </button>
           </div>
         </nav>
-      ) : (
-        <nav className="nav">
-          <Link to="/login">Login</Link>
-          <Link to="/register">Sign Up</Link>
-        </nav>
-      )}
+      ) : null}
     </header>
   );
 };

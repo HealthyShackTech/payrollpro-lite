@@ -50,9 +50,22 @@ connectToMongoDB();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// Allow both localhost and 127.0.0.1 by default. If CORS_ORIGIN is set, merge it with defaults.
+const corsDefaults = ['http://localhost:3000', 'http://127.0.0.1:3000'];
+const envOrigins = (process.env.CORS_ORIGIN || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+const allowedOrigins = Array.from(new Set([...corsDefaults, ...envOrigins]));
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, curl) and configured origins
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`Not allowed by CORS: ${origin}`));
+    },
     credentials: true,
   })
 );
