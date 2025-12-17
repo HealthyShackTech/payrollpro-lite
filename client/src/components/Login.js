@@ -69,11 +69,11 @@ const Login = () => {
         <p className="auth-subtitle">Login to your PayrollPro account</p>
 
         {successMessage && <div className="success-message">{successMessage}</div>}
-        {error && <div className="error-message">{error}</div>}
+      {error && <div className="error-message">{error}</div>}
 
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="form-group">
+          <label htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
@@ -88,18 +88,19 @@ const Login = () => {
 
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              placeholder="Enter your password"
-              autoComplete="current-password"
-            />
-          </div>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            placeholder="Enter your password"
+            autoComplete="current-password"
+          />
+        </div>
 
+        <div className="auth-actions">
           <button 
             type="submit" 
             className="auth-button" 
@@ -107,15 +108,11 @@ const Login = () => {
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
-        </form>
-
-        <p className="auth-footer">
-          Don't have an account? <Link to="/register">Sign up here</Link>
-        </p>
-      </div>
+        </div>
+      </form>
     </div>
-  );
+  </div>
+);
 };
 
 export default Login;
-

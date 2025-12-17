@@ -12,8 +12,9 @@ body {
 /* Header Styles */
 .header {
     background-color: #282c34; 
-    padding: 20px;
+    padding: 16px 20px 12px; /* tighten bottom padding to reduce gap */
     text-align: center;
+    margin-bottom: 0;
 }
 
 .logo {
