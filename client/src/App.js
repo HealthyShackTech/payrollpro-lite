@@ -75,6 +75,7 @@ const App = () => {
         <table className="table">
           <thead>
             <tr>
+              <th>#</th>
               <th>First Name</th>
               <th>Middle Name</th>
               <th>Surname</th>
@@ -83,11 +84,12 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {employees.map((emp) => (
+            {employees.map((emp, index) => (
               <tr 
                 key={emp._id}
                 onClick={() => navigate(`/employee-management/${emp._id}`)}
               >
+                <td>{index + 1}</td>
                 <td>{emp.firstName || 'Unnamed'}</td>
                 <td>{emp.middleName || 'N/A'}</td>
                 <td>{emp.surname || 'Unnamed'}</td>

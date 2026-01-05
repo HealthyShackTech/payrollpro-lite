@@ -7,6 +7,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const session = require('express-session');
 const { MongoClient, ObjectId, ServerApiVersion } = require('mongodb');
 const axios = require('axios');
+const { authenticateToken } = require('./auth-middleware');
 
 const app = express();
 
@@ -140,6 +141,13 @@ app.use('/api/auth', authRoutes);
 // For backward compatibility, we'll also set it here
 const database = client.db(process.env.DB_NAME || 'payrollpro'); // configurable DB name
 const employeesCollection = database.collection('employees');
+
+const getDb = (req) => {
+  if (req.app?.locals?.db) {
+    return req.app.locals.db;
+  }
+  return database;
+};
 
 // ---- Employees CRUD ----
 
@@ -292,6 +300,82 @@ app.put('/api/employees/:id/update-bank-account', async (req, res) => {
     res
       .status(500)
       .json({ message: 'An error occurred while updating bank account details' });
+  }
+});
+
+// ---- Business Settings ----
+
+// Get business settings for the authenticated user
+app.get('/api/business-settings', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+
+    const record = await db.collection('business_settings').findOne({ userId });
+    res.json({ success: true, data: record || null });
+  } catch (err) {
+    console.error('Error fetching business settings:', err);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch business settings',
+      details: err?.message,
+    });
+  }
+});
+
+// Upsert business settings for the authenticated user
+app.put('/api/business-settings', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+
+    const {
+      businessName = '',
+      tradingName = '',
+      abn = '',
+      acn = '',
+      businessIndustry = '',
+      specificIndustryCode = '',
+      address = '',
+      website = '',
+      email = '',
+      phone = '',
+      fax = '',
+    } = req.body || {};
+
+    const updateDoc = {
+      businessName,
+      tradingName,
+      abn,
+      acn,
+      businessIndustry,
+      specificIndustryCode,
+      address,
+      website,
+      email,
+      phone,
+      fax,
+      updatedAt: new Date(),
+    };
+
+    const result = await db.collection('business_settings').findOneAndUpdate(
+      { userId },
+      { $set: updateDoc, $setOnInsert: { userId, createdAt: new Date() } },
+      { upsert: true, returnDocument: 'after' }
+    );
+
+    res.json({
+      success: true,
+      data: result.value,
+      message: 'Business settings saved',
+    });
+  } catch (err) {
+    console.error('Error saving business settings:', err);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to save business settings',
+      details: err?.message,
+    });
   }
 });
 
