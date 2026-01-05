@@ -1,0 +1,84 @@
+
+> server@1.0.0 dev
+> node server.js
+
+Server is running on http://localhost:5001
+CORS enabled for: http://localhost:3000
+Connected to MongoDB
+Successfully connected to MongoDB!
+employee: 68eef7e59445e378706ea033
+employee: 68eef7e59445e378706ea033
+payrollHistories: [
+  {
+    _id: new ObjectId('690e77b5b0295ea7e29a2226'),
+    payrunId: 'PR-1762555829166',
+    orderNumber: '1',
+    paymentDate: '08/11/2025',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  },
+  {
+    _id: new ObjectId('690e7cfdb0295ea7e29a222b'),
+    payrunId: 'PR-1762557181844',
+    orderNumber: '2',
+    paymentDate: '08/11/2025',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  },
+  {
+    _id: new ObjectId('69433d45e3f088e5173bf062'),
+    payrunId: 'PR-1766014277437',
+    orderNumber: '3',
+    paymentDate: '18/12/2025',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  }
+]
+payrun: {
+  _id: new ObjectId('690e77b5b0295ea7e29a2226'),
+  payrunId: 'PR-1762555829166',
+  orderNumber: '1',
+  paymentDate: '08/11/2025',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+payrun: {
+  _id: new ObjectId('690e7cfdb0295ea7e29a222b'),
+  payrunId: 'PR-1762557181844',
+  orderNumber: '2',
+  paymentDate: '08/11/2025',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+payrun: {
+  _id: new ObjectId('69433d45e3f088e5173bf062'),
+  payrunId: 'PR-1766014277437',
+  orderNumber: '3',
+  paymentDate: '18/12/2025',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
