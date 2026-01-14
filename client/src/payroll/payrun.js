@@ -120,8 +120,9 @@ const PayRun = () => {
   const [selectedEmployees, setSelectedEmployees] = useState({});
   const [showRateModal, setShowRateModal] = useState(false);
   const [selectedEmployeeForRate, setSelectedEmployeeForRate] = useState(null);
+  const [payrunInfo, setPayrunInfo] = useState(null);
   const queryParams = new URLSearchParams(location.search);
-  const paymentDate = queryParams.get('date');
+  const paymentDate = queryParams.get('date') || payrunInfo?.paymentDate;
 
 // Fetch employee data
 const fetchEmployees = useCallback(async () => {
@@ -197,8 +198,18 @@ const fetchEmployees = useCallback(async () => {
   }
 }, [payrunId]);
 
+const fetchPayrunInfo = useCallback(async () => {
+  try {
+    const response = await api.get(`/api/payrun/${payrunId}`);
+    setPayrunInfo(response.data);
+  } catch (error) {
+    console.warn('Failed to load payrun info:', error);
+  }
+}, [payrunId]);
+
   useEffect(() => {
     fetchEmployees();
+    fetchPayrunInfo();
   }, [payrunId, fetchEmployees]);
 
   const handleBackClick = () => {
@@ -288,6 +299,9 @@ const fetchEmployees = useCallback(async () => {
       minimumFractionDigits: 2,
     }).format(amount || 0);
   };
+
+  const hasNumericRate = (value) =>
+    value !== null && value !== undefined && value !== '' && !Number.isNaN(Number(value));
 
   const calculateNetPay = (earnings, tax) => {
     if (!earnings) return 0;
@@ -535,14 +549,21 @@ const fetchEmployees = useCallback(async () => {
                 const tax = emp?.taxAmount || 0;
                 const superannuation = emp?.superannuationAmount || 0;
                 const netPay = calculateNetPay(earnings, tax);
-                const hasRates = emp.normalRate || emp.saturdayRate || emp.sundayRate || emp.customRate || emp.directorFee;
+                const rateItems = [
+                  { key: 'normal', label: 'Normal', value: emp.normalRate, suffix: '/hr' },
+                  { key: 'saturday', label: 'Saturday', value: emp.saturdayRate, suffix: '/hr' },
+                  { key: 'sunday', label: 'Sunday', value: emp.sundayRate, suffix: '/hr' },
+                  { key: 'custom', label: 'Custom', value: emp.customRate, suffix: '/hr' },
+                  { key: 'director', label: 'Director Fee', value: emp.directorFee }
+                ].filter((rate) => hasNumericRate(rate.value));
+                const hasRates = rateItems.length > 0;
 
                 return (
-                  <tr
-                    key={empId}
-                    onClick={() => navigateToPayslip(empId)}
-                    className={`table-row ${isSelected ? 'selected' : ''}`}
-                  >
+                  <React.Fragment key={empId}>
+                    <tr
+                      onClick={() => navigateToPayslip(empId)}
+                      className={`table-row ${isSelected ? 'selected' : ''}`}
+                    >
                     <td className="checkbox-col" onClick={(e) => e.stopPropagation()}>
                       <input
                         type="checkbox"
@@ -552,7 +573,7 @@ const fetchEmployees = useCallback(async () => {
                         className="checkbox-input"
                       />
                     </td>
-                    <td className="employee-name">
+                    <td className="employee-name" onClick={() => navigateToPayslip(empId)}>
                       <div className="name-primary">
                         {emp.firstName || 'Unnamed'} {emp.surname || 'Unnamed'}
                         </div>
@@ -560,10 +581,18 @@ const fetchEmployees = useCallback(async () => {
                         <div className="name-secondary">{emp.jobTitle}</div>
                       )}
                       </td>
-                    <td className="currency">{formatCurrency(earnings)}</td>
-                    <td className="currency">{formatCurrency(tax)}</td>
-                    <td className="currency">{formatCurrency(superannuation)}</td>
-                    <td className="currency net-pay">{formatCurrency(netPay)}</td>
+                    <td className="currency" onClick={() => navigateToPayslip(empId)}>
+                      {formatCurrency(earnings)}
+                    </td>
+                    <td className="currency" onClick={() => navigateToPayslip(empId)}>
+                      {formatCurrency(tax)}
+                    </td>
+                    <td className="currency" onClick={() => navigateToPayslip(empId)}>
+                      {formatCurrency(superannuation)}
+                    </td>
+                    <td className="currency net-pay" onClick={() => navigateToPayslip(empId)}>
+                      {formatCurrency(netPay)}
+                    </td>
                     <td className="rates-col" onClick={(e) => e.stopPropagation()}>
                       <div className="rates-buttons">
                         <button
@@ -611,6 +640,28 @@ const fetchEmployees = useCallback(async () => {
                       </button>
                     </td>
                   </tr>
+                  <tr
+                    className={`rate-row ${isSelected ? 'selected' : ''}`}
+                    onClick={() => navigateToPayslip(empId)}
+                  >
+                    <td colSpan="8" className="rate-cell">
+                      <div className="rate-row-content">
+                        <span className="rate-row-label">Rates</span>
+                        {hasRates ? (
+                          <div className="rate-badges">
+                            {rateItems.map((rate) => (
+                              <span key={rate.key} className="rate-badge">
+                                {rate.label}: {formatCurrency(rate.value)}{rate.suffix || ''}
+                              </span>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="rate-empty">No rates set</span>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                </React.Fragment>
                 );
               })}
 
