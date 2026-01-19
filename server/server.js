@@ -7,6 +7,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const session = require('express-session');
 const { MongoClient, ObjectId, ServerApiVersion } = require('mongodb');
 const axios = require('axios');
+const { authenticateToken } = require('./auth-middleware');
 
 const app = express();
 
@@ -140,6 +141,13 @@ app.use('/api/auth', authRoutes);
 // For backward compatibility, we'll also set it here
 const database = client.db(process.env.DB_NAME || 'payrollpro'); // configurable DB name
 const employeesCollection = database.collection('employees');
+
+const getDb = (req) => {
+  if (req.app?.locals?.db) {
+    return req.app.locals.db;
+  }
+  return database;
+};
 
 // ---- Employees CRUD ----
 
@@ -292,6 +300,301 @@ app.put('/api/employees/:id/update-bank-account', async (req, res) => {
     res
       .status(500)
       .json({ message: 'An error occurred while updating bank account details' });
+  }
+});
+
+// ---- Business Settings ----
+
+// Get business settings for the authenticated user
+app.get('/api/business-settings', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+
+    const record = await db.collection('business_settings').findOne({ userId });
+    res.json({ success: true, data: record || null });
+  } catch (err) {
+    console.error('Error fetching business settings:', err);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch business settings',
+      details: err?.message,
+    });
+  }
+});
+
+// Upsert business settings for the authenticated user
+app.put('/api/business-settings', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+
+    const {
+      businessName = '',
+      tradingName = '',
+      abn = '',
+      acn = '',
+      businessIndustry = '',
+      specificIndustryCode = '',
+      address = '',
+      website = '',
+      email = '',
+      phone = '',
+      fax = '',
+    } = req.body || {};
+
+    const updateDoc = {
+      businessName,
+      tradingName,
+      abn,
+      acn,
+      businessIndustry,
+      specificIndustryCode,
+      address,
+      website,
+      email,
+      phone,
+      fax,
+      updatedAt: new Date(),
+    };
+
+    const result = await db.collection('business_settings').findOneAndUpdate(
+      { userId },
+      { $set: updateDoc, $setOnInsert: { userId, createdAt: new Date() } },
+      { upsert: true, returnDocument: 'after' }
+    );
+
+    res.json({
+      success: true,
+      data: result.value,
+      message: 'Business settings saved',
+    });
+  } catch (err) {
+    console.error('Error saving business settings:', err);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to save business settings',
+      details: err?.message,
+    });
+  }
+});
+
+// Payroll settings (e.g., super rate)
+app.get('/api/payroll-settings', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+    const record = await db.collection('payroll_settings').findOne({ userId });
+    res.json({ success: true, data: record || null });
+  } catch (err) {
+    console.error('Error fetching payroll settings:', err);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch payroll settings',
+      details: err?.message,
+    });
+  }
+});
+
+app.put('/api/payroll-settings', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+    const { superRate = 0 } = req.body || {};
+
+    const numericRate = Number(superRate);
+    if (Number.isNaN(numericRate) || numericRate < 0) {
+      return res.status(400).json({ success: false, error: 'Super rate must be a non-negative number' });
+    }
+
+    const updateDoc = {
+      superRate: numericRate,
+      updatedAt: new Date(),
+    };
+
+    const result = await db.collection('payroll_settings').findOneAndUpdate(
+      { userId },
+      { $set: updateDoc, $setOnInsert: { userId, createdAt: new Date() } },
+      { upsert: true, returnDocument: 'after' }
+    );
+
+    res.json({
+      success: true,
+      data: result.value,
+      message: 'Payroll settings saved',
+    });
+  } catch (err) {
+    console.error('Error saving payroll settings:', err);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to save payroll settings',
+      details: err?.message,
+    });
+  }
+});
+
+// ---- STP Settings & Data ----
+app.get('/api/stp/settings', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+    const record = await db.collection('stp_settings').findOne({ userId });
+    res.json({ success: true, data: record || null });
+  } catch (err) {
+    console.error('Error fetching STP settings:', err);
+    res.status(500).json({ success: false, error: 'Failed to fetch STP settings', details: err?.message });
+  }
+});
+
+app.put('/api/stp/settings', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+    const payload = req.body || {};
+
+    const result = await db.collection('stp_settings').findOneAndUpdate(
+      { userId },
+      { $set: { ...payload, updatedAt: new Date() }, $setOnInsert: { userId, createdAt: new Date() } },
+      { upsert: true, returnDocument: 'after' }
+    );
+
+    res.json({ success: true, data: result.value, message: 'STP settings saved' });
+  } catch (err) {
+    console.error('Error saving STP settings:', err);
+    res.status(500).json({ success: false, error: 'Failed to save STP settings', details: err?.message });
+  }
+});
+
+app.get('/api/stp/reports', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const payrollYear = req.query.year || '';
+    const payruns = await db.collection('payrollhistories').find().toArray();
+    const payslips = await db.collection('payslips').find().toArray();
+
+    const slipsByPayrun = payslips.reduce((acc, slip) => {
+      const payrunId = slip.payrunId;
+      if (!payrunId) return acc;
+      if (!acc[payrunId]) {
+        acc[payrunId] = { employees: new Set(), gross: 0, payg: 0 };
+      }
+      acc[payrunId].employees.add(String(slip.employeeId || ''));
+      acc[payrunId].gross += slip.earnings || slip.salary || 0;
+      acc[payrunId].payg += slip.taxAmount || 0;
+      return acc;
+    }, {});
+
+    const rows = payruns.map((payrun) => {
+      const bucket = slipsByPayrun[payrun.payrunId] || { employees: new Set(), gross: payrun.wage || 0, payg: payrun.tax || 0 };
+      return {
+        payrunId: payrun.payrunId,
+        payrollYear,
+        payPeriod: payrun.orderNumber || payrun.payrunId || 'N/A',
+        paymentDate: payrun.paymentDate || '',
+        recordedAt: payrun.updatedAt || payrun.createdAt || '',
+        employees: Array.isArray(bucket.employees) ? bucket.employees.length : bucket.employees.size,
+        grossPayments: Number((bucket.gross || 0).toFixed(2)),
+        paygWithholding: Number((bucket.payg || 0).toFixed(2)),
+        status: payrun.stpFiling || 'Pending',
+      };
+    });
+
+    res.json({ success: true, data: rows });
+  } catch (err) {
+    console.error('Error fetching STP reports:', err);
+    res.status(500).json({ success: false, error: 'Failed to fetch STP reports', details: err?.message });
+  }
+});
+
+app.get('/api/stp/terminations', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+    const payrollYear = req.query.year || '';
+    const filter = { userId };
+    if (payrollYear) {
+      filter.payrollYear = payrollYear;
+    }
+    const rows = await db.collection('stp_terminations').find(filter).sort({ createdAt: -1 }).toArray();
+    res.json({ success: true, data: rows });
+  } catch (err) {
+    console.error('Error fetching STP terminations:', err);
+    res.status(500).json({ success: false, error: 'Failed to fetch STP terminations', details: err?.message });
+  }
+});
+
+app.post('/api/stp/terminations', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const userId = req.user?.userId;
+    const doc = {
+      userId,
+      payrollYear: req.body?.payrollYear || '',
+      firstName: req.body?.firstName || '',
+      lastName: req.body?.lastName || '',
+      etp: req.body?.etp || '',
+      terminationDate: req.body?.terminationDate || '',
+      reason: req.body?.reason || '',
+      createdAt: new Date(),
+    };
+    const result = await db.collection('stp_terminations').insertOne(doc);
+    const created = await db.collection('stp_terminations').findOne({ _id: result.insertedId });
+    res.status(201).json({ success: true, data: created });
+  } catch (err) {
+    console.error('Error saving STP termination:', err);
+    res.status(500).json({ success: false, error: 'Failed to save termination', details: err?.message });
+  }
+});
+
+app.get('/api/stp/eofy', authenticateToken, async (req, res) => {
+  try {
+    const db = getDb(req);
+    const payrollYear = req.query.year || '';
+    const employees = await db.collection('employees').find().toArray();
+    const payslips = await db.collection('payslips').find().toArray();
+
+    const totals = { gross: 0, payg: 0 };
+    const byEmployee = payslips.reduce((acc, slip) => {
+      const empId = String(slip.employeeId || '');
+      if (!acc[empId]) {
+        acc[empId] = { gross: 0, payg: 0 };
+      }
+      acc[empId].gross += slip.earnings || slip.salary || 0;
+      acc[empId].payg += slip.taxAmount || 0;
+      totals.gross += slip.earnings || slip.salary || 0;
+      totals.payg += slip.taxAmount || 0;
+      return acc;
+    }, {});
+
+    const rows = employees.map((emp) => {
+      const empId = String(emp._id);
+      const bucket = byEmployee[empId] || { gross: 0, payg: 0 };
+      return {
+        employeeId: empId,
+        payrollYear,
+        firstName: emp.firstName || emp.first_name || '',
+        lastName: emp.surname || emp.lastName || emp.last_name || '',
+        endDate: emp.endDate || emp.terminationDate || '',
+        grossYtd: Number((bucket.gross || 0).toFixed(2)),
+        paygYtd: Number((bucket.payg || 0).toFixed(2)),
+        finalIndicator: emp.finalIndicator || false,
+      };
+    });
+
+    res.json({
+      success: true,
+      data: {
+        summary: {
+          employees: employees.length,
+          grossYtd: Number((totals.gross || 0).toFixed(2)),
+          paygYtd: Number((totals.payg || 0).toFixed(2)),
+        },
+        rows,
+      },
+    });
+  } catch (err) {
+    console.error('Error fetching EOFY data:', err);
+    res.status(500).json({ success: false, error: 'Failed to fetch EOFY data', details: err?.message });
   }
 });
 

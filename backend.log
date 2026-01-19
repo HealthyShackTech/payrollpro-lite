@@ -1,0 +1,336 @@
+
+> server@1.0.0 start
+> node server.js
+
+Server is running on http://localhost:5001
+CORS enabled for: http://localhost:3000
+Connected to MongoDB
+Successfully connected to MongoDB!
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+payrollHistories: [
+  {
+    _id: new ObjectId('69637318a04d5380d71dbd6b'),
+    payrunId: 'PR-1768125208394',
+    orderNumber: '1',
+    paymentDate: '11/01/2026',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  }
+]
+payrun: {
+  _id: new ObjectId('69637318a04d5380d71dbd6b'),
+  payrunId: 'PR-1768125208394',
+  orderNumber: '1',
+  paymentDate: '11/01/2026',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+payrollHistories: [
+  {
+    _id: new ObjectId('69637318a04d5380d71dbd6b'),
+    payrunId: 'PR-1768125208394',
+    orderNumber: '1',
+    paymentDate: '11/01/2026',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  }
+]
+payrun: {
+  _id: new ObjectId('69637318a04d5380d71dbd6b'),
+  payrunId: 'PR-1768125208394',
+  orderNumber: '1',
+  paymentDate: '11/01/2026',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+payrollHistories: [
+  {
+    _id: new ObjectId('69637318a04d5380d71dbd6b'),
+    payrunId: 'PR-1768125208394',
+    orderNumber: '1',
+    paymentDate: '11/01/2026',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  }
+]
+payrun: {
+  _id: new ObjectId('69637318a04d5380d71dbd6b'),
+  payrunId: 'PR-1768125208394',
+  orderNumber: '1',
+  paymentDate: '11/01/2026',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+payrollHistories: [
+  {
+    _id: new ObjectId('69637318a04d5380d71dbd6b'),
+    payrunId: 'PR-1768125208394',
+    orderNumber: '1',
+    paymentDate: '11/01/2026',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  }
+]
+payrun: {
+  _id: new ObjectId('69637318a04d5380d71dbd6b'),
+  payrunId: 'PR-1768125208394',
+  orderNumber: '1',
+  paymentDate: '11/01/2026',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+payrollHistories: [
+  {
+    _id: new ObjectId('69637318a04d5380d71dbd6b'),
+    payrunId: 'PR-1768125208394',
+    orderNumber: '1',
+    paymentDate: '11/01/2026',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  }
+]
+payrun: {
+  _id: new ObjectId('69637318a04d5380d71dbd6b'),
+  payrunId: 'PR-1768125208394',
+  orderNumber: '1',
+  paymentDate: '11/01/2026',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+payrollHistories: [
+  {
+    _id: new ObjectId('69637318a04d5380d71dbd6b'),
+    payrunId: 'PR-1768125208394',
+    orderNumber: '1',
+    paymentDate: '11/01/2026',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  }
+]
+payrun: {
+  _id: new ObjectId('69637318a04d5380d71dbd6b'),
+  payrunId: 'PR-1768125208394',
+  orderNumber: '1',
+  paymentDate: '11/01/2026',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+payrollHistories: [
+  {
+    _id: new ObjectId('69637318a04d5380d71dbd6b'),
+    payrunId: 'PR-1768125208394',
+    orderNumber: '1',
+    paymentDate: '11/01/2026',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  }
+]
+payrun: {
+  _id: new ObjectId('69637318a04d5380d71dbd6b'),
+  payrunId: 'PR-1768125208394',
+  orderNumber: '1',
+  paymentDate: '11/01/2026',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+payrollHistories: [
+  {
+    _id: new ObjectId('69637318a04d5380d71dbd6b'),
+    payrunId: 'PR-1768125208394',
+    orderNumber: '1',
+    paymentDate: '11/01/2026',
+    wage: 0,
+    tax: 0,
+    super: 0,
+    netPay: 0,
+    stpFiling: 'Pending',
+    __v: 0
+  }
+]
+payrun: {
+  _id: new ObjectId('69637318a04d5380d71dbd6b'),
+  payrunId: 'PR-1768125208394',
+  orderNumber: '1',
+  paymentDate: '11/01/2026',
+  wage: 0,
+  tax: 0,
+  super: 0,
+  netPay: 0,
+  stpFiling: 'Pending',
+  __v: 0
+}
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef6479445e378706ea032 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef7e59445e378706ea033 and Payrun ID: PR-1768125208394
+Fetching payslip for Employee ID: 68eef7e59445e378706ea033 and Payrun ID: PR-1768125208394

@@ -1,7 +1,10 @@
 // src/components/Administration.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Administration = () => {
+  const navigate = useNavigate();
+
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Administration</h1>
@@ -17,7 +20,12 @@ const Administration = () => {
         <div style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '8px', width: '30%' }}>
           <h2>Settings</h2>
           <p>Adjust system settings and configurations.</p>
-          <button style={{ padding: '10px 20px', marginTop: '10px' }}>Go to Settings</button>
+          <button
+            style={{ padding: '10px 20px', marginTop: '10px' }}
+            onClick={() => navigate('/administration/settings')}
+          >
+            Go to Settings
+          </button>
         </div>
 
         <div style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '8px', width: '30%' }}>

@@ -53,6 +53,13 @@ const payslipSchema = new mongoose.Schema({
   superannuationAmount: Number,
   hoursWorked: Number,
   salaryRate: Number,
+  earningLines: [
+    {
+      type: { type: String },
+      rate: Number,
+      hours: Number,
+    },
+  ],
 });
 
 const Payslip = mongoose.model('payslips', payslipSchema);
@@ -189,7 +196,19 @@ app.get('/api/employees/:employeeId/payslips/:payrunId', async (req, res) => {
 
 app.put('/api/employees/:employeeId/payslips/:payrunId', async (req, res) => {
   const { employeeId, payrunId } = req.params;
-  const {salary, position, payDate, employeeFirstName, employeeSurname, earnings, taxAmount, superannuationAmount, hoursWorked, salaryRate } = req.body;
+  const {
+    salary,
+    position,
+    payDate,
+    employeeFirstName,
+    employeeSurname,
+    earnings,
+    taxAmount,
+    superannuationAmount,
+    hoursWorked,
+    salaryRate,
+    earningLines,
+  } = req.body;
 
   try {
     // Check if a payslip already exists for this employee and payrun
@@ -207,6 +226,7 @@ app.put('/api/employees/:employeeId/payslips/:payrunId', async (req, res) => {
       existingPayslip.superannuationAmount = superannuationAmount;
       existingPayslip.hoursWorked = hoursWorked;
       existingPayslip.salaryRate = salaryRate;
+      existingPayslip.earningLines = earningLines || [];
 
       await existingPayslip.save();
       return res.status(200).json(existingPayslip); // Respond with the updated payslip
@@ -230,6 +250,7 @@ app.post('/api/employees/:employeeId/payslips/:payrunId', async (req, res) => {
     superannuationAmount,
     hoursWorked,
     salaryRate,
+    earningLines,
   } = req.body;
 
   try {
@@ -248,6 +269,7 @@ app.post('/api/employees/:employeeId/payslips/:payrunId', async (req, res) => {
       payslip.superannuationAmount = superannuationAmount;
       payslip.hoursWorked = hoursWorked;
       payslip.salaryRate = salaryRate;
+      payslip.earningLines = earningLines || [];
 
       await payslip.save(); // Save updated payslip
       return res.status(200).json({ message: 'Payslip updated successfully', data: payslip });
@@ -267,6 +289,7 @@ app.post('/api/employees/:employeeId/payslips/:payrunId', async (req, res) => {
         superannuationAmount,
         hoursWorked,
         salaryRate,
+        earningLines: earningLines || [],
       });
 
       await payslip.save(); // Save new payslip
@@ -572,4 +595,3 @@ app.get('/api/audit-trail/export', async (req, res) => {
 
 // The routes are already defined above using the global app
 // No need to export anything as the routes are already registered
-
